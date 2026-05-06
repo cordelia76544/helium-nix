@@ -41,9 +41,10 @@
         if [ -n "$desktopFile" ]; then
           install -Dm444 "$desktopFile" "$out/share/applications/helium.desktop"
 
-          substituteInPlace "$out/share/applications/helium.desktop" \
-            --replace-regexp '^Exec=.*' 'Exec=helium %U' \
-            --replace-regexp '^Name=.*' 'Name=Helium'
+          sed -i \
+            -e 's|^Exec=.*|Exec=helium %U|' \
+            -e 's|^Name=.*|Name=Helium|' \
+            "$out/share/applications/helium.desktop"
         fi
 
         if [ -d ${appimageContents}/usr/share/icons ]; then
