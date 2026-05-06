@@ -66,17 +66,21 @@
       };
     };
   in {
-    packages.${system}.default = helium;
-    packages.${system}.helium = helium;
-
-    apps.${system}.default = {
-      type = "app";
-      program = "${helium}/bin/helium";
+    packages.${system} = {
+      default = helium;
+      helium = helium;
     };
 
-    apps.${system}.helium = {
-      type = "app";
-      program = "${helium}/bin/helium";
+    apps.${system} = {
+      default = {
+        type = "app";
+        program = "${helium}/bin/helium";
+      };
+
+      helium = {
+        type = "app";
+        program = "${helium}/bin/helium";
+      };
     };
 
     overlays.default = final: prev: {
